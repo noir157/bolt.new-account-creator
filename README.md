@@ -65,9 +65,3 @@ Contribuições são sempre bem-vindas! Sinta-se à vontade para abrir uma issue
 
 📄 Licença
 Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
-
-📞 Contato
-Se você tiver alguma dúvida ou sugestão, entre em contato:
-
-E-mail: seu-email@exemplo.com
-GitHub: seu-usuario
