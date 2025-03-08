@@ -16,7 +16,7 @@ Este repositório contém um script em JavaScript para a criação automática d
 
 - **JavaScript**: Linguagem principal do script.
 - **Node.js**: Ambiente de execução para JavaScript.
-- **Bibliotecas adicionais**: (adicione aqui as bibliotecas que você usou, como `axios`, `puppeteer`, etc.).
+- **Bibliotecas adicionais**:`axios`, `puppeteer`
 
 ---
 
