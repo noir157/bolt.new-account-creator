@@ -1,58 +1,64 @@
-const fs = require('fs');
 const path = require('path');
 
-const helpers = {
 
+const ADJECTIVES = ['Happy', 'Quick', 'Smart', 'Bright', 'Cool', 'Clever', 'Bold', 'Super', 'Mega', 'Hyper', 'Ultra', 'Power', 'Wonder', 'Magic', 'Fast'];
+const NOUNS = ['Wolf', 'Dev', 'Star', 'Coder', 'Ninja', 'Guru', 'Hero', 'Master', 'Wizard', 'Sage', 'Tiger', 'Eagle', 'Lion', 'Hawk', 'Phoenix'];
+
+const helpers = {
+  log(message, type = 'info') {
+    const timestamp = new Date().toISOString().slice(11, 19);
+    const prefix = type === 'error' ? '❌ ERROR' : 
+                  type === 'success' ? '✅ SUCCESS' : 
+                  type === 'warn' ? '⚠️ WARN' : 
+                  'ℹ️ INFO';
+                  
+    console.log(`[${timestamp}] ${prefix}: ${message}`);
+  },
+  
+  async delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  },
+  
+  async randomDelay(min, max) {
+    const delay = Math.floor(Math.random() * (max - min + 1)) + min;
+    return this.delay(delay);
+  },
+  
   getTimestamp() {
     return new Date().toISOString().replace(/[:.]/g, '-');
   },
   
-  async randomDelay(min = 300, max = 800) {
-    const delay = Math.floor(Math.random() * (max - min + 1)) + min;
-    await new Promise(resolve => setTimeout(resolve, delay));
-    return delay;
-  },
-  
-
-  async delay(timeout) {
-    await new Promise(resolve => setTimeout(resolve, timeout));
-  },
-  
-  ensureDirectoryExists(dirPath) {
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-    }
-  },
-  
-
-  saveToFile(filePath, content) {
-    this.ensureDirectoryExists(path.dirname(filePath));
-    fs.writeFileSync(filePath, content);
-  },
-  
   generateUsername() {
-    const prefix = 'user_';
-    const randomPart = Math.random().toString(36).substring(2, 8);
-    const timestamp = Date.now().toString().slice(-4);
-    return `${prefix}${randomPart}${timestamp}`;
+    const adjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+    const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
+    const number = Math.floor(Math.random() * 9000) + 1000;
+    return `${adjective}${noun}${number}`;
   },
   
   generatePassword() {
-    const randomPart = Math.random().toString(36).substring(2, 8);
-    const number = Math.floor(Math.random() * 900) + 100; // 100-999
-    return `Pass_${randomPart}_${number}!`;
-  },
-  
-  log(message, type = 'info') {
-    const timestamp = new Date().toISOString().slice(11, 19);
-    const prefix = {
-      info: '📘 INFO',
-      warn: '⚠️ AVISO',
-      error: '❌ ERRO',
-      success: '✅ SUCESSO'
-    }[type] || '📘 INFO';
+    const upperChars = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const lowerChars = 'abcdefghijkmnopqrstuvwxyz';
+    const numbers = '23456789';
+    const specialChars = '!@#$%^&*';
     
-    console.log(`[${timestamp}] ${prefix}: ${message}`);
+    const allChars = upperChars + lowerChars + numbers + specialChars;
+    
+    let password = '';
+    
+    
+    password += upperChars.charAt(Math.floor(Math.random() * upperChars.length));
+    password += lowerChars.charAt(Math.floor(Math.random() * lowerChars.length));
+    password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+    
+    
+    const remainingLength = Math.floor(Math.random() * 3) + 6;
+    for (let i = 0; i < remainingLength; i++) {
+      password += allChars.charAt(Math.floor(Math.random() * allChars.length));
+    }
+    
+    
+    return password.split('').sort(() => 0.5 - Math.random()).join('');
   }
 };
 

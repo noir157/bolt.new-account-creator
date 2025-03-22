@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bolt.new Account Creator</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+
+<body class="light-theme">
+  <div class="app-container">
+    <!-- Barra de título estilo macOS -->
+    <header class="titlebar">
+      <div class="titlebar-controls">
+        <div class="titlebar-button close" id="close-btn"></div>
+        <div class="titlebar-button minimize" id="minimize-btn"></div>
+        <div class="titlebar-button maximize" id="maximize-btn"></div>
+      </div>
+      <div class="titlebar-title">Bolt.new Account Creator</div>
+      <div class="titlebar-spacer"></div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="content">
+      <!-- Barra lateral -->
+      <div class="sidebar">
+        <div class="app-logo">
+          <img src="assets/images/logo.svg" alt="App Logo">
+          <h1>Bolt Creator</h1>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-view="dashboard">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
+            </svg>
+            Dashboard
+          </button>
+          <button class="nav-item" data-view="accounts">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
+            Contas
+          </button>
+          <button class="nav-item" data-view="settings">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+            </svg>
+            Configurações
+          </button>
+          <button class="nav-item" data-view="about">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+            Sobre
+          </button>
+        </nav>
+      </div>
+
+      <!-- Área de conteúdo principal -->
+      <div class="main-content">
+        <!-- Dashboard -->
+        <div class="content-view active" id="dashboard-view">
+          <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <button id="start-btn" class="primary-button">
+              <svg viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              Iniciar Automação
+            </button>
+          </div>
+
+          <!-- Card de status -->
+          <div class="status-card">
+            <div class="status-icon pending" id="status-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+              </svg>
+            </div>
+            <div class="status-content">
+              <h3>Status: <span id="status-text">Pronto</span></h3>
+              <p class="status-description" id="status-description">Sistema pronto para criar e confirmar contas no
+                Bolt.new</p>
+              <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Console de logs -->
+          <div class="console-container">
+            <div class="console-header">
+              <h3>Log de Processo</h3>
+              <div class="console-actions">
+                <button id="clear-log-btn" class="icon-button" title="Limpar log">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="console-output" id="log-container">
+              <div class="log-entry info">
+                <span class="log-time">00:00:00</span>
+                <span class="log-badge">INFO</span>
+                <span class="log-message">Sistema pronto. Clique em "Iniciar Automação" para começar.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contas -->
+        <div class="content-view" id="accounts-view">
+          <div class="accounts-header">
+            <h2>Contas Criadas</h2>
+            <div class="accounts-actions">
+              <button id="export-accounts-btn" class="secondary-button">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z" />
+                </svg>
+                Exportar
+              </button>
+            </div>
+          </div>
+
+          <div class="accounts-list" id="accounts-list">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+              <p>Nenhuma conta criada ainda</p>
+              <button class="primary-button" id="create-first-account-btn">
+                Criar primeira conta
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Configurações -->
+        <div class="content-view" id="settings-view">
+          <h2>Configurações</h2>
+
+          <div class="settings-form">
+
+            <div class="form-group">
+              <label for="headless-mode">Modo do Navegador</label>
+              <div class="toggle-container">
+                <input type="checkbox" id="headless-mode" class="toggle-input">
+                <label for="headless-mode" class="toggle-label"></label>
+                <span class="toggle-text">Modo Headless (navegador invisível)</span>
+              </div>
+              <p class="input-help">O navegador ficará invisível durante a automação</p>
+            </div>
+
+            <div class="form-group">
+              <label for="max-retries">Tentativas Máximas</label>
+              <input type="number" id="max-retries" value="3" min="1" max="10">
+              <p class="input-help">Número máximo de tentativas em caso de falha</p>
+            </div>
+
+            <div class="form-group">
+              <button class="primary-button" id="save-settings-btn">Salvar Configurações</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sobre -->
+        <div class="content-view" id="about-view">
+          <div class="about-content">
+            <img src="assets/images/logo.svg" alt="App Logo" class="about-logo">
+            <h2>Bolt.new Account Creator</h2>
+            <p class="version">Versão 1.0.0</p>
+            <p class="description">
+              Uma ferramenta automatizada para criar e confirmar contas na plataforma Bolt.new.
+              Esta aplicação utiliza serviços de email temporário para verificar contas automaticamente.
+            </p>
+            <div class="tech-stack">
+              <h3>Tecnologias:</h3>
+              <ul>
+                <li>Electron <span id="electron-version"></span></li>
+                <li>Node.js <span id="node-version"></span></li>
+                <li>Puppeteer</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal de resultado -->
+    <div id="result-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Detalhes da Conta</h3>
+          <button id="close-modal-btn" class="close-btn">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="result-section">
+            <h4>Informações da Conta</h4>
+            <div class="result-info">
+              <div class="result-item">
+                <span class="result-label">Email:</span>
+                <div class="result-value-container">
+                  <span id="result-email" class="result-value"></span>
+                  <button class="copy-btn" data-copy-target="result-email" title="Copiar">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Username:</span>
+                <div class="result-value-container">
+                  <span id="result-username" class="result-value"></span>
+                  <button class="copy-btn" data-copy-target="result-username" title="Copiar">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Password:</span>
+                <div class="result-value-container">
+                  <span id="result-password" class="result-value"></span>
+                  <button class="copy-btn" data-copy-target="result-password" title="Copiar">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="primary-button" id="save-account-btn">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="assets/js/renderer.js"></script>
+</body>
+
+</html>

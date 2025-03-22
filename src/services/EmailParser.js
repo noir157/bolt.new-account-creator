@@ -1,4 +1,5 @@
 const helpers = require('../utils/helpers');
+
 class EmailParser {
   static extractConfirmationLink(emailData) {
     let bodyText = '';
@@ -7,25 +8,18 @@ class EmailParser {
       bodyText = emailData;
       helpers.log('Corpo do email recebido como string');
     } 
-
     else if (emailData && typeof emailData === 'object') {
-      helpers.log('Corpo do email recebido como objeto. Propriedades: ' + Object.keys(emailData).join(', '));
+      helpers.log('Corpo do email recebido como objeto');
       
       if (emailData.html) {
         bodyText = emailData.html;
         helpers.log('Usando corpo HTML do email');
-      } else if (emailData.text) {
-        bodyText = emailData.text;
-        helpers.log('Usando corpo texto do email');
+      } else if (emailData.htmlEmbedded) {
+        bodyText = emailData.htmlEmbedded;
+        helpers.log('Usando corpo HTML incorporado do email');
       } else if (emailData.body) {
         bodyText = emailData.body;
         helpers.log('Usando propriedade body do email');
-      } else if (emailData.content) {
-        bodyText = emailData.content;
-        helpers.log('Usando propriedade content do email');
-      } else if (emailData.intro) {
-        bodyText = emailData.intro;
-        helpers.log('Usando propriedade intro do email');
       } else {
         for (const key in emailData) {
           const value = emailData[key];
